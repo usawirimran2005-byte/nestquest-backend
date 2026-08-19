@@ -11,7 +11,16 @@ const messageRoutes = require("./routes/messageRoutes");
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://nestquest-usawir.netlify.app"
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 connectDB();
@@ -26,6 +35,10 @@ app.use("/api/messages", messageRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
