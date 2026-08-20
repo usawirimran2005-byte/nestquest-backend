@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(express.json());
 
-connectDB();
+connectDB().catch((err) => console.error("DB connection error:", err.message));
 
 app.get("/", (req, res) => {
   res.send("NestQuest Backend is Running");
