@@ -11,15 +11,8 @@ const messageRoutes = require("./routes/messageRoutes");
 
 const app = express();
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://nestquest-usawir.netlify.app"
-    ],
-    credentials: true,
-  })
-);
+app.use(cors());
+app.options("*", cors());
 
 app.use(express.json());
 
